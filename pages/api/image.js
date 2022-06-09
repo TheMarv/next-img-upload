@@ -8,15 +8,11 @@ export const config = {
 };
 
 export default async function image(req, res) {
+  console.log(process.cwd());
   const form = new formidable.IncomingForm({
     keepExtensions: true,
     maxFileSize: 10 * 1024 * 1024, // 10MB
-    uploadDir:
-      process.env.NODE_ENV === 'development'
-        ? path.join(__dirname, '..', '..', '..', '..', 'public', 'uploads')
-        : path.join(__dirname, '..', 'public', 'uploads'),
+    uploadDir: path.join(process.cwd(), 'public', 'uploads'),
   });
-  form.parse(req, (err, fields, files) => {
-    console.log(err, fields, files);
-  });
+  form.parse(req, (err, fields, files) => {});
 }
